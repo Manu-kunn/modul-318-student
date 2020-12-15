@@ -41,7 +41,7 @@
             return HttpClient.GetObject(uri, JsonConvert.DeserializeObject<StationBoardRoot>);
         }
 
-        public Connections GetConnections(string fromStation, string toStation)
+        public Connections GetConnections(string fromStation, string toStation, int limit)
         {
             if (string.IsNullOrEmpty(fromStation))
             {
@@ -53,7 +53,7 @@
                 throw new ArgumentNullException(nameof(toStation));
             }
 
-            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}");
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&limit={limit} ");
             return HttpClient.GetObject(uri, JsonConvert.DeserializeObject<Connections>);
         }
 
