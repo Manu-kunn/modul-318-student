@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace MyTransportApp
 {
+
   public partial class Form1 : Form
   {
 
@@ -26,6 +27,7 @@ namespace MyTransportApp
 
     private void sucheButton_Click(object sender, EventArgs e)
     {
+      ausgabeGrid.Rows.Clear();
       if (titelLable.Text == "Verbindungen suchen")
       {
         suchMode();
@@ -40,21 +42,20 @@ namespace MyTransportApp
     {
       if (vonBox.Text != "" && nachBox.Text != "")
       {
-        var connections = transport.GetConnections(vonBox.Text, nachBox.Text, 10);
-        foreach(var connection in connections.ConnectionList)
+        var connections = transport.GetConnections(vonBox.Text, nachBox.Text, datumdp.Value, timedp.Value, 10);
+        foreach (var connection in connections.ConnectionList)
         {
-          ausgabeGrid.Rows.Add(new[] { 
-            connection.From.Station.Name, 
+          ausgabeGrid.Rows.Add(new[] {
+            connection.From.Station.Name,
             connection.To.Station.Name,
-            connection.From.Platform , 
-            connection.From.Departure.ToString(), 
-            connection.To.Arrival.Value.ToString(), 
+            connection.From.Platform ,
+            connection.From.Departure.ToString(),
+            connection.To.Arrival.Value.ToString(),
             connection.Duration });
         }
       }
       else
       {
-
         MessageBox.Show("Fehlender Abfahrt-/Zielort");
       }
     }
@@ -63,7 +64,12 @@ namespace MyTransportApp
     {
       if (vonBox.Text != "")
       {
-
+        DateTime zeit = DateTime.Now;
+        var verbindungen = transport.GetStationBoard(vonBox.Text, "0", zeit, 10);
+        foreach (var verbindung in verbindungen.Entries)
+        {
+          ausgabeGrid.Rows.Add(verbindungen.Station.Name, verbindung.To, verbindung.Name, verbindung.Stop.Departure);
+        }
       }
       else
       {
@@ -75,21 +81,57 @@ namespace MyTransportApp
     {
       if (titelLable.Text == "Verbindungen suchen")
       {
-        nachLable.Visible = false;
-        nachBox.Visible = false;
-        wechselnButton.Visible = false;
+        ausgabeGrid.Columns[2].HeaderText = "Zug-Name";
+        ausgabeGrid.Columns[3].HeaderText = "Uhrzeit";
+        ausgabeGrid.Columns[4].HeaderText = "-";
+        ausgabeGrid.Columns[5].HeaderText = "-";
+        nachBox.Enabled = false;
+        wechselnButton.Enabled = false;
+        datumdp.Enabled = false;
+        timedp.Enabled = false;
         titelLable.Text = "Abfahrtstafel";
         abfahrtstafelButton.Text = "Verbindungen suchen";
       }
       else
       {
-        nachLable.Visible = true;
-        nachBox.Visible = true;
-        wechselnButton.Visible = true;
+        ausgabeGrid.Columns[2].HeaderText = "Platform";
+        ausgabeGrid.Columns[3].HeaderText = "Abfahrt";
+        ausgabeGrid.Columns[4].HeaderText = "Ankunft";
+        ausgabeGrid.Columns[5].HeaderText = "Dauer";
+        nachBox.Enabled = true;
+        wechselnButton.Enabled = true;
+        datumdp.Enabled = true;
+        timedp.Enabled = true;
         titelLable.Text = "Verbindungen suchen";
         abfahrtstafelButton.Text = "Abfahrtstafel";
       }
 
+    }
+
+    private void wechselnButton_Click(object sender, EventArgs e)
+    {
+      string zwischenSpeicher = vonBox.Text;
+      vonBox.Text = nachBox.Text;
+      nachBox.Text = zwischenSpeicher;
+
+    }
+
+    private void vonBox_KeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter && e.KeyCode != Keys.Escape)
+      {
+        var combobox = (ComboBox)sender;
+        AutoCompletion.AddSuggestions(combobox);
+      }
+    }
+
+    private void nachBox_KeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter && e.KeyCode != Keys.Escape && e.KeyCode != Keys.Tab && e.KeyCode != Keys.Back)
+      {
+        var TextBox = (ComboBox)sender;
+        AutoCompletion.AddSuggestions(TextBox);
+      }
     }
   }
 }

@@ -29,6 +29,8 @@
     private void InitializeComponent()
     {
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.timedp = new System.Windows.Forms.DateTimePicker();
+      this.label1 = new System.Windows.Forms.Label();
       this.nachBox = new System.Windows.Forms.ComboBox();
       this.vonBox = new System.Windows.Forms.ComboBox();
       this.sucheButton = new System.Windows.Forms.Button();
@@ -40,16 +42,15 @@
       this.label3 = new System.Windows.Forms.Label();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.ausgabeGrid = new System.Windows.Forms.DataGridView();
-      this.titelLable = new System.Windows.Forms.Label();
-      this.label2 = new System.Windows.Forms.Label();
       this.Von = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Nach = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Platform = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Abfahrt = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Ankunft = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Zeit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.label1 = new System.Windows.Forms.Label();
-      this.timedp = new System.Windows.Forms.DateTimePicker();
+      this.titelLable = new System.Windows.Forms.Label();
+      this.label2 = new System.Windows.Forms.Label();
+      this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ausgabeGrid)).BeginInit();
@@ -75,6 +76,28 @@
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Suche";
       // 
+      // timedp
+      // 
+      this.timedp.Checked = false;
+      this.timedp.CustomFormat = "HH:mm";
+      this.timedp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+      this.timedp.Location = new System.Drawing.Point(297, 68);
+      this.timedp.Name = "timedp";
+      this.timedp.ShowUpDown = true;
+      this.timedp.Size = new System.Drawing.Size(55, 20);
+      this.timedp.TabIndex = 12;
+      this.timedp.Value = new System.DateTime(2020, 12, 16, 9, 26, 0, 0);
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+      this.label1.Location = new System.Drawing.Point(263, 74);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(28, 13);
+      this.label1.TabIndex = 11;
+      this.label1.Text = "Zeit:";
+      // 
       // nachBox
       // 
       this.nachBox.FormattingEnabled = true;
@@ -82,6 +105,7 @@
       this.nachBox.Name = "nachBox";
       this.nachBox.Size = new System.Drawing.Size(249, 21);
       this.nachBox.TabIndex = 10;
+      this.nachBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nachBox_KeyUp);
       // 
       // vonBox
       // 
@@ -90,6 +114,7 @@
       this.vonBox.Name = "vonBox";
       this.vonBox.Size = new System.Drawing.Size(249, 21);
       this.vonBox.TabIndex = 9;
+      this.vonBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.vonBox_KeyUp);
       // 
       // sucheButton
       // 
@@ -115,10 +140,12 @@
       // 
       // datumdp
       // 
+      this.datumdp.CustomFormat = "";
       this.datumdp.Location = new System.Drawing.Point(54, 68);
       this.datumdp.Name = "datumdp";
       this.datumdp.Size = new System.Drawing.Size(184, 20);
       this.datumdp.TabIndex = 6;
+      this.datumdp.Value = new System.DateTime(2020, 12, 16, 0, 0, 0, 0);
       // 
       // label5
       // 
@@ -149,6 +176,7 @@
       this.wechselnButton.TabIndex = 2;
       this.wechselnButton.Text = "wechseln";
       this.wechselnButton.UseVisualStyleBackColor = true;
+      this.wechselnButton.Click += new System.EventHandler(this.wechselnButton_Click);
       // 
       // label3
       // 
@@ -186,30 +214,6 @@
       this.ausgabeGrid.Size = new System.Drawing.Size(763, 239);
       this.ausgabeGrid.TabIndex = 0;
       // 
-      // titelLable
-      // 
-      this.titelLable.AutoSize = true;
-      this.titelLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.titelLable.ForeColor = System.Drawing.Color.Black;
-      this.titelLable.Location = new System.Drawing.Point(87, 15);
-      this.titelLable.Name = "titelLable";
-      this.titelLable.Size = new System.Drawing.Size(277, 31);
-      this.titelLable.TabIndex = 2;
-      this.titelLable.Text = "Verbindungen suchen";
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-      this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.label2.Font = new System.Drawing.Font("Impact", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.ForeColor = System.Drawing.Color.SteelBlue;
-      this.label2.Location = new System.Drawing.Point(9, 9);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(74, 41);
-      this.label2.TabIndex = 3;
-      this.label2.Text = "SBN";
-      // 
       // Von
       // 
       this.Von.HeaderText = "Von";
@@ -244,32 +248,45 @@
       this.Zeit.HeaderText = "Dauer";
       this.Zeit.Name = "Zeit";
       // 
-      // label1
+      // titelLable
       // 
-      this.label1.AutoSize = true;
-      this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-      this.label1.Location = new System.Drawing.Point(263, 74);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(28, 13);
-      this.label1.TabIndex = 11;
-      this.label1.Text = "Zeit:";
+      this.titelLable.AutoSize = true;
+      this.titelLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.titelLable.ForeColor = System.Drawing.Color.Black;
+      this.titelLable.Location = new System.Drawing.Point(87, 15);
+      this.titelLable.Name = "titelLable";
+      this.titelLable.Size = new System.Drawing.Size(277, 31);
+      this.titelLable.TabIndex = 2;
+      this.titelLable.Text = "Verbindungen suchen";
       // 
-      // timedp
+      // label2
       // 
-      this.timedp.Checked = false;
-      this.timedp.CustomFormat = "HH:mm";
-      this.timedp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-      this.timedp.Location = new System.Drawing.Point(297, 68);
-      this.timedp.Name = "timedp";
-      this.timedp.ShowUpDown = true;
-      this.timedp.Size = new System.Drawing.Size(55, 20);
-      this.timedp.TabIndex = 12;
+      this.label2.AutoSize = true;
+      this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+      this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.label2.Font = new System.Drawing.Font("Impact", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label2.ForeColor = System.Drawing.Color.SteelBlue;
+      this.label2.Location = new System.Drawing.Point(9, 9);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(74, 41);
+      this.label2.TabIndex = 3;
+      this.label2.Text = "SBN";
+      // 
+      // groupBox3
+      // 
+      this.groupBox3.Location = new System.Drawing.Point(794, 54);
+      this.groupBox3.Name = "groupBox3";
+      this.groupBox3.Size = new System.Drawing.Size(509, 384);
+      this.groupBox3.TabIndex = 4;
+      this.groupBox3.TabStop = false;
+      this.groupBox3.Text = "Karte";
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
+      this.ClientSize = new System.Drawing.Size(1315, 450);
+      this.Controls.Add(this.groupBox3);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.titelLable);
       this.Controls.Add(this.groupBox2);
@@ -310,6 +327,7 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Zeit;
     private System.Windows.Forms.DateTimePicker timedp;
     private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.GroupBox groupBox3;
   }
 }
 

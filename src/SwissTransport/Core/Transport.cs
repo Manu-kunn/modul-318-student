@@ -18,14 +18,14 @@
         {
             if (string.IsNullOrEmpty(query))
             {
-                throw new ArgumentNullException(nameof(query));
+               // throw new ArgumentNullException(nameof(query));
             }
 
             var uri = new Uri($"{WebApiHost}locations?query={query}");
             return HttpClient.GetObject(uri, JsonConvert.DeserializeObject<Stations>);
         }
 
-        public StationBoardRoot GetStationBoard(string station, string id)
+        public StationBoardRoot GetStationBoard(string station, string id, DateTime datum, int limit)
         {
             if (string.IsNullOrEmpty(station))
             {
@@ -37,11 +37,11 @@
                 throw new ArgumentNullException(nameof(id));
             }
 
-            var uri = new Uri($"{WebApiHost}stationboard?station={station}&id={id}");
+            var uri = new Uri($"{WebApiHost}stationboard?station={station}&id={id}&datum={datum}&limit={limit}");
             return HttpClient.GetObject(uri, JsonConvert.DeserializeObject<StationBoardRoot>);
         }
 
-        public Connections GetConnections(string fromStation, string toStation, int limit)
+        public Connections GetConnections(string fromStation, string toStation, DateTime datum, DateTime time, int limit)
         {
             if (string.IsNullOrEmpty(fromStation))
             {
@@ -53,7 +53,7 @@
                 throw new ArgumentNullException(nameof(toStation));
             }
 
-            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&limit={limit} ");
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&date={datum}&time={time}&limit={limit}");
             return HttpClient.GetObject(uri, JsonConvert.DeserializeObject<Connections>);
         }
 
