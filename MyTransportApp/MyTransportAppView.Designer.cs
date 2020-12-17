@@ -1,6 +1,6 @@
 ﻿namespace MyTransportApp
 {
-  partial class Form1
+  partial class MyTransportAppView
   {
     /// <summary>
     /// Erforderliche Designervariable.
@@ -50,7 +50,6 @@
       this.Zeit = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.titelLable = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
-      this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ausgabeGrid)).BeginInit();
@@ -85,8 +84,8 @@
       this.timedp.Name = "timedp";
       this.timedp.ShowUpDown = true;
       this.timedp.Size = new System.Drawing.Size(55, 20);
-      this.timedp.TabIndex = 12;
-      this.timedp.Value = new System.DateTime(2020, 12, 16, 9, 26, 0, 0);
+      this.timedp.TabIndex = 4;
+      this.timedp.Value = new System.DateTime(2020, 12, 17, 0, 0, 0, 0);
       // 
       // label1
       // 
@@ -104,7 +103,7 @@
       this.nachBox.Location = new System.Drawing.Point(521, 17);
       this.nachBox.Name = "nachBox";
       this.nachBox.Size = new System.Drawing.Size(249, 21);
-      this.nachBox.TabIndex = 10;
+      this.nachBox.TabIndex = 2;
       this.nachBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nachBox_KeyUp);
       // 
       // vonBox
@@ -113,7 +112,7 @@
       this.vonBox.Location = new System.Drawing.Point(42, 17);
       this.vonBox.Name = "vonBox";
       this.vonBox.Size = new System.Drawing.Size(249, 21);
-      this.vonBox.TabIndex = 9;
+      this.vonBox.TabIndex = 1;
       this.vonBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.vonBox_KeyUp);
       // 
       // sucheButton
@@ -122,7 +121,7 @@
       this.sucheButton.Location = new System.Drawing.Point(610, 61);
       this.sucheButton.Name = "sucheButton";
       this.sucheButton.Size = new System.Drawing.Size(160, 20);
-      this.sucheButton.TabIndex = 8;
+      this.sucheButton.TabIndex = 5;
       this.sucheButton.Text = "Suche";
       this.sucheButton.UseVisualStyleBackColor = true;
       this.sucheButton.Click += new System.EventHandler(this.sucheButton_Click);
@@ -133,7 +132,7 @@
       this.abfahrtstafelButton.Location = new System.Drawing.Point(610, 87);
       this.abfahrtstafelButton.Name = "abfahrtstafelButton";
       this.abfahrtstafelButton.Size = new System.Drawing.Size(160, 20);
-      this.abfahrtstafelButton.TabIndex = 7;
+      this.abfahrtstafelButton.TabIndex = 6;
       this.abfahrtstafelButton.Text = "Abfahrtstafel";
       this.abfahrtstafelButton.UseVisualStyleBackColor = true;
       this.abfahrtstafelButton.Click += new System.EventHandler(this.abfahrtstafelButton_Click);
@@ -144,8 +143,8 @@
       this.datumdp.Location = new System.Drawing.Point(54, 68);
       this.datumdp.Name = "datumdp";
       this.datumdp.Size = new System.Drawing.Size(184, 20);
-      this.datumdp.TabIndex = 6;
-      this.datumdp.Value = new System.DateTime(2020, 12, 16, 0, 0, 0, 0);
+      this.datumdp.TabIndex = 3;
+      this.datumdp.Value = new System.DateTime(2020, 12, 17, 9, 22, 31, 0);
       // 
       // label5
       // 
@@ -173,7 +172,7 @@
       this.wechselnButton.Location = new System.Drawing.Point(360, 18);
       this.wechselnButton.Name = "wechselnButton";
       this.wechselnButton.Size = new System.Drawing.Size(75, 20);
-      this.wechselnButton.TabIndex = 2;
+      this.wechselnButton.TabIndex = 8;
       this.wechselnButton.Text = "wechseln";
       this.wechselnButton.UseVisualStyleBackColor = true;
       this.wechselnButton.Click += new System.EventHandler(this.wechselnButton_Click);
@@ -212,7 +211,7 @@
       this.ausgabeGrid.Location = new System.Drawing.Point(7, 20);
       this.ausgabeGrid.Name = "ausgabeGrid";
       this.ausgabeGrid.Size = new System.Drawing.Size(763, 239);
-      this.ausgabeGrid.TabIndex = 0;
+      this.ausgabeGrid.TabIndex = 7;
       // 
       // Von
       // 
@@ -272,27 +271,19 @@
       this.label2.TabIndex = 3;
       this.label2.Text = "SBN";
       // 
-      // groupBox3
-      // 
-      this.groupBox3.Location = new System.Drawing.Point(794, 54);
-      this.groupBox3.Name = "groupBox3";
-      this.groupBox3.Size = new System.Drawing.Size(509, 384);
-      this.groupBox3.TabIndex = 4;
-      this.groupBox3.TabStop = false;
-      this.groupBox3.Text = "Karte";
-      // 
-      // Form1
+      // MyTransportAppView
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1315, 450);
-      this.Controls.Add(this.groupBox3);
+      this.ClientSize = new System.Drawing.Size(798, 450);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.titelLable);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
       this.ForeColor = System.Drawing.Color.Aqua;
-      this.Name = "Form1";
+      this.MaximumSize = new System.Drawing.Size(814, 489);
+      this.MinimumSize = new System.Drawing.Size(814, 489);
+      this.Name = "MyTransportAppView";
       this.Text = "Schweizerisches Bahnnetz";
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
@@ -327,7 +318,6 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Zeit;
     private System.Windows.Forms.DateTimePicker timedp;
     private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.GroupBox groupBox3;
   }
 }
 
